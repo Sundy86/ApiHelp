@@ -1,0 +1,14 @@
+.idea/
+.meta-data/
+node_modules/*
+*/target/*
+*.iml
+target/
+out/
+.sass-cache/*
+dep.txt
+classes/*
+
+tomcat.*
+
+*.log
