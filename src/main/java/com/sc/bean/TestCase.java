@@ -1,6 +1,8 @@
 package com.sc.bean;
 
 import com.github.crab2died.annotation.ExcelField;
+import com.sc.convert.IsValidReadConvert;
+import com.sc.convert.IsValidWriteConvert;
 
 
 public class TestCase {
@@ -26,6 +28,16 @@ public class TestCase {
 	@ExcelField(title = "关联")
 	private String correlation;
 
+	@ExcelField(title = "是否有效",order = 1,readConverter = IsValidReadConvert.class,writeConverter = IsValidWriteConvert.class)
+	private boolean validFlag;
+
+	public boolean isValidFlag() {
+		return validFlag;
+	}
+
+	public void setValidFlag(boolean validFlag) {
+		this.validFlag = validFlag;
+	}
 
 	public String getCheckP() {
 		return checkP;

@@ -1,8 +1,6 @@
 package com.work.test;
 
-import com.alibaba.fastjson.JSON;
 import com.sc.http.HttpClientException;
-import com.sc.http.HttpUtils;
 import com.work.util.JsonUtil;
 
 public class RuleJsonTest {
