@@ -5,6 +5,7 @@ node_modules/*
 *.iml
 target/
 out/
+META-INF/
 .sass-cache/*
 dep.txt
 classes/*
