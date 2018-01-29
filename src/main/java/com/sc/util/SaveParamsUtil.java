@@ -20,7 +20,7 @@ public class SaveParamsUtil {
                            String k = nodekey + "_g" + (i+1);
                            String v = list.get(i).toString();
                            paramsMap.put(k, v);
-                           System.out.println(k+"-------"+v);
+                        //  System.out.println(k+"-------"+v);
                         }
 
                 }else{

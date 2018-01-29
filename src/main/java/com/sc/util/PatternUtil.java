@@ -9,7 +9,7 @@ public class PatternUtil {
     public static void matcherParams(TestCase testCase){
         Matcher matcher = patternRule.matcher(testCase.getUrl());
         while (matcher.find()){
-            System.out.println(matcher.group());
+          //  System.out.println(matcher.group());
             String key = matcher.group(1);
             String value = SaveParamsUtil.get(key).toString();
             String url = testCase.getUrl().replace(matcher.group(),value);
@@ -22,7 +22,7 @@ public class PatternUtil {
         Matcher matcher = patternRule.matcher(str);
         String url = null;
         while (matcher.find()){
-            System.out.println(matcher.group());
+           // System.out.println(matcher.group());
             String key = matcher.group(1);
             String value = SaveParamsUtil.get(key).toString();
             url = str.replace(matcher.group(),value);

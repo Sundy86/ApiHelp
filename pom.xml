@@ -13,6 +13,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- 编译时的编码 -->
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
+        <suiteXmlFile>src/test/testng.xml</suiteXmlFile>
     </properties>
 
     <dependencies>
@@ -69,8 +71,36 @@
             <artifactId>commons-configuration</artifactId>
             <version>1.10</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.uncommons</groupId>
+            <artifactId>reportng</artifactId>
+            <version>1.1.5</version>
+            <scope>test</scope>
+        </dependency>
+        <!--reportng1.1.5依赖包-->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <!--用于zip文件压缩-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.15</version>
+        </dependency>
     </dependencies>
+
 
     <build>
         <resources>
@@ -78,6 +108,16 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <targetPath>${project.build.directory}/classes</targetPath>
+            </resource>
+            <!--拷贝data文件夹到target目录下-->
+            <resource>
+                <directory>data</directory>
+                <targetPath>${project.build.directory}/data</targetPath>
+            </resource>
+            <!--拷贝report-output文件夹到target目录下-->
+            <resource>
+                <directory>report-output</directory>
+                <targetPath>${project.build.directory}/report-output</targetPath>
             </resource>
         </resources>
         <plugins>
@@ -109,7 +149,7 @@
                             <!-- 生成的manifest中classpath的前缀，因为要把第三方jar放到lib目录下，所以classpath的前缀是lib/ -->
                             <classpathPrefix>lib/</classpathPrefix>
                             <!-- 应用的main class -->
-                            <mainClass>com.sc.test.ApiTest</mainClass>
+                            <mainClass>com.sc.test.ApitestNgTest</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -137,7 +177,34 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <!-- 添加插件 关联testNg.xml -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <properties>
+                        <property>
+                            <name>usedefaultlisteners</name>
+                            <value>false</value>
+                        </property>
+                        <property>
+                            <name>listener</name>
+                            <value>org.uncommons.reportng.HTMLReporter,
+                                org.uncommons.reportng.JUnitXMLReporter,
+                                com.sc.retry.OverrideIAnnotationTransformer,
+                                com.sc.test.TestNGEmailReport
+                            </value>
+                        </property>
+                    </properties>
+                    <reportsDirectory>report-output/</reportsDirectory>
+                    <workingDirectory>target/</workingDirectory>
+                </configuration>
+            </plugin>
 
 
         </plugins>

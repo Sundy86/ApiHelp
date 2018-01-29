@@ -44,4 +44,5 @@ public class ApiTest {
         ExcelUtils.getInstance().exportObjects2Excel( list, TestCase.class, resultPath);
         EmailUtils.sendEmailWithAttachment("api测试结果","具体测试结果，请查看附件，谢谢！", EmailParams.username,EmailParams.password,EmailParams.tousers,resultPath);
     }
+
 }
