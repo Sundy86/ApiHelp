@@ -34,7 +34,7 @@ public class ApitestNgTest {
         if (checkFlag) {
             SaveParamsUtil.saveParamsToMap(responseJson, testCase.getCorrelation());
          }
-        Assert.assertTrue(false);
+        Assert.assertTrue(checkFlag);
     }
 
     @DataProvider(name = "apiData")

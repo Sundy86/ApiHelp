@@ -7,7 +7,7 @@ public class MapUtil {
 
         Map<String,Object> map = null;
         if(str!=null) {
-            String[] strs = str.split(regx);
+            String[] strs = str.trim().split(regx);
             map = new HashMap<String,Object>();
             for (String s : strs) {
                 String[] ss = s.split("=");
